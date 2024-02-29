@@ -1,12 +1,18 @@
-import { useSelector } from "react-redux"
 
+import { useDispatch, useSelector } from "react-redux"
+import { deleteUser } from "../store/slices/UserSlice";
 
 
 const DisplayUser = () => {
     const data=useSelector((state)=>{
         return state.users;
     })
-    console.log(data);
+    const dispatch=useDispatch();
+    // console.log(data);
+    const removeUser=(id)=>{
+        dispatch(deleteUser(id))
+    }
+
     return (
         <div>
             <ul className="flex-col justify-around align-middle ">
@@ -17,7 +23,7 @@ const DisplayUser = () => {
                             
                             <div className="flex justify-around align-middle m-4">
                             <li key={id}>{user}</li>
-                            <button className="p-2 bg-blue-700 text-white border rounded-md">Delete User</button>
+                            <button onClick={()=>removeUser(id)} className="p-2 bg-blue-700 text-white border rounded-md">Delete User</button>
                             
                             </div>
                             </>
