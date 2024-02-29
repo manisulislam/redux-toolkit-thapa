@@ -1,7 +1,17 @@
 import ClearUser from "./ClearUser"
+import { fakeUserData } from "../api"
+import { useDispatch } from "react-redux"
+import { addUser } from "../store/slices/UserSlice"
+import DisplayUser from "./DisplayUser"
 
 
 const UserDetails = () => {
+
+  const dispatch=useDispatch()
+  const addNewUser = (payload) => {
+    // console.log(payload);
+    dispatch(addUser(payload))
+  }
   return (
     <>
         <section className=" m-8 w-3/4 flex justify-between align-middle">
@@ -10,15 +20,12 @@ const UserDetails = () => {
             
         </div>
         <div>
-            <button className="p-4 bg-purple-800 text-white border rounded-md">Add User</button>
+            <button onClick={()=>addNewUser(fakeUserData())} className="p-4 bg-purple-800 text-white border rounded-md">Add User</button>
         </div>
         
         </section>
         <hr className="p-4 mr-12 ml-12" />
-        <ul className="flex justify-around align-middle ">
-            <li>anis</li>
-            <button className="p-4 bg-blue-700 text-white border rounded-md">Delete User</button>
-        </ul>
+        <DisplayUser></DisplayUser>
         <div>
         <hr className="p-4  mt-4 mr-12 ml-12" />
         </div>
